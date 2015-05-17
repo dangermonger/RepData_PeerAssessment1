@@ -1,9 +1,4 @@
----
-title: 'Reproducible Research: Peer Assessment 1'
-output:
-  html_document:
-    keep_md: yes
----
+# Reproducible Research: Peer Assessment 1
 
 ###Loading and preprocessing the data
 
@@ -119,7 +114,7 @@ ggplot(data=sumtable,
 ## Warning: Removed 8 rows containing missing values (position_stack).
 ```
 
-![plot of chunk unnamed-chunk-3](figure/unnamed-chunk-3-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png) 
 
 ####3. Calculate and report the mean and median of the total number of steps taken per day
 
@@ -165,7 +160,7 @@ ggplot(data=timetable,
     geom_line()
 ```
 
-![plot of chunk unnamed-chunk-6](figure/unnamed-chunk-6-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png) 
 
 ####2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -233,7 +228,7 @@ ggplot(data=sumnonas,
        geom_histogram(stat = "identity")
 ```
 
-![plot of chunk unnamed-chunk-11](figure/unnamed-chunk-11-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-11-1.png) 
 
 List mean and median, before and after imputation of NA values.
 
@@ -311,4 +306,4 @@ ggplot(data=weekdaysdata, aes(x=interval, y=steps, colour=date )) +
     ggtitle("Weekend v Weekday activity patterns\n") 
 ```
 
-![plot of chunk unnamed-chunk-14](figure/unnamed-chunk-14-1.png) 
+![](PA1_template_files/figure-html/unnamed-chunk-14-1.png) 
