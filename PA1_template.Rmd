@@ -9,7 +9,7 @@ output:
 
 Set working directory and load dplyr and ggplot2 packages, silencing package message. Unzip and read file. Convert data frame to tbl then convert date column to date format.  
 
-```{r}
+```{r, echo=TRUE}
 setwd("C:/Users/Dangermonger/Documents/GitHub/RepData_PeerAssessment1")
 
 library(dplyr, warn.conflicts=FALSE) 
@@ -29,7 +29,7 @@ convertbl <- tbl_df(actdata) %>%
 
 Group by date column and then sum steps. Print as data frame to show total per day.
 
-```{r}
+```{r, echo=TRUE}
 sumtable <- convertbl %>% 
     group_by(date)%>% 
     summarise(steps = sum(steps))
@@ -40,7 +40,7 @@ print.data.frame(sumtable)
 
 Assign axes and label plot. Include stat = 'identity' to explicitly represent values for y axis.
 
-```{r}
+```{r, echo=TRUE}
 ggplot(data=sumtable, 
     aes(x = date, y = steps)) + 
     labs(title="Histogram of Steps per Day") +
@@ -52,7 +52,7 @@ ggplot(data=sumtable,
 
 Print mean and median
 
-```{r}
+```{r, echo=TRUE}
 mean(sumtable$steps, na.rm = TRUE)
 median(sumtable$steps, na.rm = TRUE)
 ```
@@ -62,7 +62,7 @@ median(sumtable$steps, na.rm = TRUE)
 
 Calculate the mean of the steps taken by each interval group, ignoring NA values.
 
-```{r}
+```{r, echo=TRUE}
 timetable <- convertbl %>% 
     group_by(interval)%>% 
     summarise(steps = mean(steps, na.rm = TRUE))
@@ -70,7 +70,7 @@ timetable <- convertbl %>%
 
 Assign axes and label line graph plot. 
 
-```{r}
+```{r, echo=TRUE}
 ggplot(data=timetable, 
     aes(x = interval, y = steps)) + 
     labs(title="Time Series of Average Steps per 5-minute interval") +
@@ -82,7 +82,7 @@ ggplot(data=timetable,
 
 Subset the row at the maximum steps value.
 
-```{r}
+```{r, echo=TRUE}
 timetable[which(timetable$steps == max(timetable$steps)),] 
 ```
 ###Imputing missing values
@@ -91,7 +91,7 @@ timetable[which(timetable$steps == max(timetable$steps)),]
 
 Sum NAs in steps column.
 
-```{r}
+```{r, echo=TRUE}
 sum(is.na(actdata$steps))
 ```
 
@@ -101,7 +101,7 @@ Group data by interval, rewrite steps column where nas are replaced by the mean 
 
 ####3. Create a new dataset that is equal to the original dataset but with the missing data filled in.
 
-```{r}
+```{r, echo=TRUE}
 nonas <- convertbl %>% 
     group_by(interval) %>%
     mutate(steps = ifelse(is.na(steps), +
@@ -112,7 +112,7 @@ nonas <- convertbl %>%
 
 Group by date and sum steps.
 
-```{r}
+```{r, echo=TRUE}
 sumnonas <- nonas %>% 
     group_by(date)%>% 
     summarise(steps = sum(steps))
@@ -120,7 +120,7 @@ sumnonas <- nonas %>%
 
 Assign axes and label plot. Include stat = 'identity' to explicitly represent values for y axis.
 
-```{r}
+```{r, echo=TRUE}
 ggplot(data=sumnonas, 
        aes(x = date, y = steps)) + 
        labs(title="Histogram of Steps per Day") +
@@ -130,7 +130,7 @@ ggplot(data=sumnonas,
 
 List mean and median, before and after imputation of NA values.
 
-```{r}
+```{r, echo=TRUE}
 mean(sumnonas$steps)
 median(sumnonas$steps)
 
@@ -152,7 +152,7 @@ The mean is exactly the same because mean imputation does not affect the sample 
 
 Assign Saturday and Sunday to weekend handle. Convert date column to weekdays. Where weekdays are equal to Saturday and Sunday, convert to 'weekend', otherwise convert to 'weekday'. Convert date column to factor variable. Group by date and interval then calculate the mean of steps by groups.
 
-```{r}
+```{r, echo=TRUE}
 weekend <- c("Saturday", "Sunday")
 
 weekdaysdata <- nonas %>%
@@ -167,7 +167,7 @@ weekdaysdata <- nonas %>%
 
 Assign axes, colour by date, plot line graph facets horizontally. Add outline to facet label, remove legend. Label and title graph.
 
-```{r}
+```{r, echo=TRUE}
 ggplot(data=weekdaysdata, aes(x=interval, y=steps, colour=date )) + 
     facet_grid(date ~ .)+ 
     geom_line()+ 
